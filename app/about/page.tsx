@@ -61,7 +61,7 @@ const AboutPage = () => {
             </h2>
             <p className='mx-auto mb-8 max-w-2xl leading-relaxed text-gray-400'>
               Whether you&apos;re just starting out or refining your skills,
-              TechBLog is designed to inspire better code, better design, and
+              TechBlog is designed to inspire better code, better design, and
               better thinking.
             </p>
             <Link
