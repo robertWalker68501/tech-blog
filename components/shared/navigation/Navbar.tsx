@@ -21,13 +21,14 @@ const Navbar = () => {
 
       {/* Desktop Navigation */}
       <div className='flex items-center gap-4'>
-        <div
+        <button
+          type='button'
           className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'
           onClick={openSearch}
         >
           <LuSearch size={20} />
           <span className='hidden md:block'>Search</span>
-        </div>
+        </button>
         <div>
           <Link
             href='/write'
