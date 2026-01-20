@@ -25,7 +25,7 @@ const SearchModal = () => {
             return (
               <button
                 key={result.id}
-                className='tranisition w-full cursor-pointer px-4 py-3 text-left text-gray-300 hover:bg-white/5 hover:text-white'
+                className='transition w-full cursor-pointer px-4 py-3 text-left text-gray-300 hover:bg-white/5 hover:text-white'
               >
                 {result.title}
               </button>
