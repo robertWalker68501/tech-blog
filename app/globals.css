@@ -131,4 +131,8 @@
   .container {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
+
+  .primary-heading {
+    @apply mb-4 text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl;
+  }
 }
