@@ -40,3 +40,16 @@ export const POSTS = [
     image: '/assets/images/p3.png',
   },
 ];
+
+export const RESULTS = [
+  {
+    id: 1,
+    title: 'Building a Medium-Style Blog with Next.js',
+    slug: '/articles/medium-style-blog',
+  },
+  {
+    id: 2,
+    title: 'Dark Mode Done Right in Tailwind',
+    slug: '/articles/dark-mode-tailwind',
+  },
+];

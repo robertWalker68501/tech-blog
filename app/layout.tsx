@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Roboto } from 'next/font/google';
 
 import './globals.css';
+import SearchModal from '@/components/modals/SearchModal';
+import SignInModal from '@/components/modals/SignInModal';
 import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
 import { ThemeProvider } from '@/providers/ThemeProvider';
@@ -49,6 +51,8 @@ export default function RootLayout({
             <Header />
             <main className='flex-1'>{children}</main>
             <Footer />
+            <SignInModal />
+            <SearchModal />
           </div>
         </ThemeProvider>
       </body>
