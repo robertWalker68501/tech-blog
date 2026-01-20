@@ -20,9 +20,14 @@ const Navbar = () => {
           <LuSearch size={20} />
           <span className='hidden md:block'>Search</span>
         </div>
-        <div className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'>
-          <LuNotebookPen size={20} />
-          <span className='hidden md:block'>Write</span>
+        <div>
+          <Link
+            href='/write'
+            className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'
+          >
+            <LuNotebookPen size={20} />
+            <span className='hidden md:block'>Write</span>
+          </Link>
         </div>
         <div className='hidden items-center gap-4 md:flex'>
           {NAV_LINKS.map(({ id, href, label }) => (
