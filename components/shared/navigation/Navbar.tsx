@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { LuNotebookPen, LuSearch } from 'react-icons/lu';
 
@@ -7,8 +9,11 @@ import { ThemeToggle } from '@/components/shared/navigation/ThemeToggle';
 import SiteLogo from '@/components/shared/SiteLogo';
 import { Button } from '@/components/ui/button';
 import { NAV_LINKS } from '@/constants';
+import { useModalStore } from '@/store/useModalStore';
 
 const Navbar = () => {
+  const { openSignIn, openSearch } = useModalStore();
+
   return (
     <nav className='flex w-full items-center justify-between py-4'>
       {/* Site Logo */}
@@ -16,7 +21,10 @@ const Navbar = () => {
 
       {/* Desktop Navigation */}
       <div className='flex items-center gap-4'>
-        <div className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'>
+        <div
+          className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'
+          onClick={openSearch}
+        >
           <LuSearch size={20} />
           <span className='hidden md:block'>Search</span>
         </div>
@@ -37,8 +45,11 @@ const Navbar = () => {
               label={label}
             />
           ))}
-          <Button size='lg'>
-            <Link href='/login'>Login</Link>
+          <Button
+            size='lg'
+            onClick={openSignIn}
+          >
+            Login
           </Button>
           <ThemeToggle />
         </div>
