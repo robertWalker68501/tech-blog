@@ -11,7 +11,7 @@ const AboutPage = () => {
             About TechBlog
           </h1>
           <p className='mx-auto max-w-2xl leading-relaxed text-gray-400'>
-            A modern tech blog real-world development, and thoughtful
+            A modern tech blog about real-world development and thoughtful
             engineering.
           </p>
         </div>
