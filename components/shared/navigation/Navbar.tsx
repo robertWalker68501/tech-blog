@@ -9,10 +9,17 @@ import { ThemeToggle } from '@/components/shared/navigation/ThemeToggle';
 import SiteLogo from '@/components/shared/SiteLogo';
 import { Button } from '@/components/ui/button';
 import { NAV_LINKS } from '@/constants';
+import { authClient } from '@/lib/auth-client';
 import { useModalStore } from '@/store/useModalStore';
 
 const Navbar = () => {
   const { openSignIn, openSearch } = useModalStore();
+
+  const { data: session, isPending } = authClient.useSession();
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+  };
 
   return (
     <nav className='flex w-full items-center justify-between py-4'>
@@ -29,15 +36,17 @@ const Navbar = () => {
           <LuSearch size={20} />
           <span className='hidden md:block'>Search</span>
         </button>
-        <div>
-          <Link
-            href='/write'
-            className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'
-          >
-            <LuNotebookPen size={20} />
-            <span className='hidden md:block'>Write</span>
-          </Link>
-        </div>
+        {session && (
+          <div>
+            <Link
+              href='/write'
+              className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'
+            >
+              <LuNotebookPen size={20} />
+              <span className='hidden md:block'>Write</span>
+            </Link>
+          </div>
+        )}
         <div className='hidden items-center gap-4 md:flex'>
           {NAV_LINKS.map(({ id, href, label }) => (
             <NavLink
@@ -46,13 +55,27 @@ const Navbar = () => {
               label={label}
             />
           ))}
-          <Button
-            size='lg'
-            onClick={openSignIn}
-          >
-            Login
-          </Button>
-          <ThemeToggle />
+          <>
+            {!isPending && (
+              <>
+                {session ? (
+                  <Button
+                    size='lg'
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Button>
+                ) : (
+                  <Button
+                    size='lg'
+                    onClick={openSignIn}
+                  >
+                    Login
+                  </Button>
+                )}
+              </>
+            )}
+          </>
         </div>
       </div>
 
