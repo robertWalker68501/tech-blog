@@ -136,3 +136,18 @@
     @apply mb-4 text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl;
   }
 }
+
+/* target the jodit editor container to restore list styles */
+.jodit-workplace ul {
+  list-style-type: disc !important;
+  padding-left: 2rem !important;
+}
+
+.jodit-workplace ol {
+  list-style-type: decimal !important;
+  padding-left: 2rem !important;
+}
+
+.jodit-workplace li {
+  display: list-item !important;
+}
