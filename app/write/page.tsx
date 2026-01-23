@@ -69,7 +69,16 @@ export default function WritePage() {
       if (axios.isAxiosError(error)) {
         //toast to the user about the error
 
-        toast(error.response?.data.error, {
+        const errorMessage =
+          error.response?.data?.error || 'Failed to publish article';
+        toast(errorMessage, {
+          style: {
+            color: 'white',
+            background: '#1e3a8a',
+          },
+        });
+      } else {
+        toast('An unexpected error occurred', {
           style: {
             color: 'white',
             background: '#1e3a8a',
@@ -130,7 +139,7 @@ export default function WritePage() {
         <div className='flex justify-end'>
           <button
             disabled={isSubmitting}
-            className='bg-primary cursor-pointer rounded-full px-6 py-3 font-semibold text-white transition-colors'
+            className='bg-primary cursor-pointer rounded-full px-6 py-3 font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50'
           >
             {isSubmitting ? 'Publishing...' : 'Publish'}
           </button>
