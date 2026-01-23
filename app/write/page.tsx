@@ -1,4 +1,5 @@
 'use client';
+
 import { useMemo, useRef, useState } from 'react';
 
 import axios from 'axios';
@@ -51,11 +52,7 @@ export default function WritePage() {
       formData.append('content', content);
       formData.append('coverImage', coverImage);
 
-      await axios.post('/api/posts', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      await axios.post('/api/posts', formData);
 
       setContent('');
       setTitle('');
@@ -131,7 +128,10 @@ export default function WritePage() {
         </div>
 
         <div className='flex justify-end'>
-          <button className='bg-primary cursor-pointer rounded-full px-6 py-3 font-semibold text-white transition-colors'>
+          <button
+            disabled={isSubmitting}
+            className='bg-primary cursor-pointer rounded-full px-6 py-3 font-semibold text-white transition-colors'
+          >
             {isSubmitting ? 'Publishing...' : 'Publish'}
           </button>
         </div>

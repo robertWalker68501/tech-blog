@@ -3,13 +3,13 @@ import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Roboto } from 'next/font/google';
 import './globals.css';
-import { Toaster } from 'react-hot-toast';
 
 import SearchModal from '@/components/modals/SearchModal';
 import SignInModal from '@/components/modals/SignInModal';
 import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { ToasterProvider } from '@/providers/ToasterProvider';
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -54,7 +54,7 @@ export default function RootLayout({
             <Footer />
             <SignInModal />
             <SearchModal />
-            <Toaster />
+            <ToasterProvider />
           </div>
         </ThemeProvider>
       </body>

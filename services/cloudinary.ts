@@ -8,6 +8,14 @@ export type CloudinaryUploadResult = {
 export async function uploadToCloudinary(
   file: File
 ): Promise<CloudinaryUploadResult> {
+  const MAX_FILE_BYTES = 5 * 1024 * 1024; // adjust to product limits
+  if (!file.type || !file.type.startsWith('image/')) {
+    throw new Error('Only image uploads are allowed');
+  }
+  if (file.size > MAX_FILE_BYTES) {
+    throw new Error('Image exceeds the allowed size limit');
+  }
+
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
   const base64 = buffer.toString('base64');
