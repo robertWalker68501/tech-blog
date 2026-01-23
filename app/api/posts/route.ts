@@ -8,6 +8,7 @@ import prisma from '@/lib/prisma';
 import {
   CloudinaryUploadResult,
   uploadToCloudinary,
+  deleteFromCloudinary,
 } from '@/services/cloudinary';
 
 export async function POST(req: Request) {
@@ -81,7 +82,10 @@ export async function POST(req: Request) {
           error.code === 'P2002'
         ) {
           attempts++;
-          if (attempts >= maxAttempts) throw error;
+          if (attempts >= maxAttempts) {
+            await deleteFromCloudinary(imageData.public_id);
+            throw error;
+          }
 
           // Regenerate slug for next attempt
           slug = `${baseSlug}-${counter}`;
@@ -91,7 +95,10 @@ export async function POST(req: Request) {
           const delay = Math.pow(2, attempts) * 100 + Math.random() * 50;
           await new Promise((resolve) => setTimeout(resolve, delay));
         } else {
-          throw error;
+          await deleteFromCloudinary(imageData.public_id);
+          if (!post) {
+            throw new Error('Failed to create post after retries');
+          }
         }
       }
     }
