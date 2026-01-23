@@ -7,7 +7,6 @@ import { IoMenu } from 'react-icons/io5';
 import { LuNotebookPen, LuSearch } from 'react-icons/lu';
 
 import NavLink from '@/components/shared/navigation/NavLink';
-import { ThemeToggle } from '@/components/shared/navigation/ThemeToggle';
 import SiteLogo from '@/components/shared/SiteLogo';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -48,11 +47,11 @@ const MobileNav = () => {
         <div className='flex flex-col justify-center gap-4 px-6'>
           <div className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'>
             <LuSearch size={20} />
-            <span className=''>Search</span>
+            <span>Search</span>
           </div>
           <div className='flex cursor-pointer items-center gap-1 text-lg font-semibold text-gray-400'>
             <LuNotebookPen size={20} />
-            <span className=''>Write</span>
+            <span>Write</span>
           </div>
           {NAV_LINKS.map(({ id, href, label }) => (
             <NavLink
@@ -63,7 +62,6 @@ const MobileNav = () => {
               isMobile
             />
           ))}
-          <ThemeToggle />
           <Button size='lg'>
             <Link href='/login'>Login</Link>
           </Button>

@@ -5,7 +5,6 @@ import { LuNotebookPen, LuSearch } from 'react-icons/lu';
 
 import MobileNav from '@/components/shared/navigation/MobileNav';
 import NavLink from '@/components/shared/navigation/NavLink';
-import { ThemeToggle } from '@/components/shared/navigation/ThemeToggle';
 import SiteLogo from '@/components/shared/SiteLogo';
 import { Button } from '@/components/ui/button';
 import { NAV_LINKS } from '@/constants';

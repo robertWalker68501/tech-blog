@@ -11,7 +11,6 @@ export default defineConfig([
   // Use Tailwind's flat recommended config (beta supports v4)
   ...tailwind.configs['flat/recommended'],
 
-  // Your project-specific rules
   {
     plugins: {
       import: pluginImport,
@@ -36,7 +35,7 @@ export default defineConfig([
         },
       ],
 
-      // Optional Tailwind rule tweaks (can keep defaults)
+      // Optional Tailwind rule tweaks
       // "tailwindcss/classnames-order": "warn",
       'tailwindcss/no-custom-classname': 'off',
     },
