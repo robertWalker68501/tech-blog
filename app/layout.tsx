@@ -2,8 +2,9 @@ import { ReactNode } from 'react';
 
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Roboto } from 'next/font/google';
-
 import './globals.css';
+import { Toaster } from 'react-hot-toast';
+
 import SearchModal from '@/components/modals/SearchModal';
 import SignInModal from '@/components/modals/SignInModal';
 import Footer from '@/components/shared/Footer';
@@ -53,6 +54,7 @@ export default function RootLayout({
             <Footer />
             <SignInModal />
             <SearchModal />
+            <Toaster />
           </div>
         </ThemeProvider>
       </body>
