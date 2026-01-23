@@ -4,10 +4,23 @@ import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
 import Modal from '@/components/modals/Modal';
+import { authClient } from '@/lib/auth-client';
 import { useModalStore } from '@/store/useModalStore';
 
 const SignInModal = () => {
   const { isSignInOpen, closeSignIn } = useModalStore();
+
+  const signInWithGoogle = async () => {
+    await authClient.signIn.social({
+      provider: 'google',
+    });
+  };
+
+  const signInWithGitHub = async () => {
+    await authClient.signIn.social({
+      provider: 'github',
+    });
+  };
 
   return (
     <Modal
@@ -24,12 +37,18 @@ const SignInModal = () => {
 
       <div className='space-y-4'>
         {/* Google */}
-        <button className='flex w-full cursor-pointer items-center justify-center gap-3 rounded-full bg-white py-3 font-medium text-black transition hover:bg-gray-200'>
+        <button
+          onClick={signInWithGoogle}
+          className='flex w-full cursor-pointer items-center justify-center gap-3 rounded-full bg-white py-3 font-medium text-black transition hover:bg-gray-200'
+        >
           <FcGoogle className='text-xl' />
           Continue with Google
         </button>
 
-        <button className='bg-hover flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border border-white/10 py-3 font-medium text-white transition hover:bg-[#202020]'>
+        <button
+          onClick={signInWithGitHub}
+          className='bg-hover flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border border-white/10 py-3 font-medium text-white transition hover:bg-[#202020]'
+        >
           <FaGithub className='text-xl' />
           Continue with GitHub
         </button>
