@@ -112,3 +112,59 @@ export async function POST(req: Request) {
     );
   }
 }
+
+export async function GET(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+
+    const DEFAULT_LIMIT = 3;
+    const MAX_LIMIT = 50;
+
+    const cursor = searchParams.get('cursor');
+
+    const rawLimit = Number(searchParams.get('limit'));
+    const limit =
+      Number.isNaN(rawLimit) || rawLimit <= 0
+        ? DEFAULT_LIMIT
+        : Math.min(rawLimit, MAX_LIMIT);
+
+    const posts = await prisma.post.findMany({
+      take: limit + 1,
+      orderBy: { createdAt: 'desc' },
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      select: {
+        id: true,
+        excerpt: true,
+        title: true,
+        slug: true,
+        createdAt: true,
+        coverImageURL: true,
+        author: {
+          select: {
+            name: true,
+            image: true,
+          },
+        },
+      },
+    });
+
+    // Determine the pagination states
+    const hasMore = posts.length > limit;
+
+    const items = hasMore ? posts.slice(0, limit) : posts;
+
+    const nextCursor = hasMore ? items[items.length - 1].id : null;
+
+    return NextResponse.json({
+      posts: items,
+      nextCursor,
+    });
+  } catch (error) {
+    console.error('FETCH_POSTS_ERROR: ', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch posts' },
+      { status: 500 }
+    );
+  }
+}
