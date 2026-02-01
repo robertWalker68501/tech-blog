@@ -1,8 +1,11 @@
+import { Suspense } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { LuArrowRight } from 'react-icons/lu';
 
 import RecentPosts from '@/components/posts/RecentPosts';
+import PostCardSkeleton from '@/components/skeletons/PostCardSkeleton';
 
 const Home = () => {
   return (
@@ -54,7 +57,9 @@ const Home = () => {
         </div>
       </div>
       {/* Recent Posts */}
-      <RecentPosts />
+      <Suspense fallback={<PostCardSkeleton />}>
+        <RecentPosts />
+      </Suspense>
     </section>
   );
 };

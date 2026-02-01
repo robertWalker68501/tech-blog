@@ -10,6 +10,7 @@ import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { ToasterProvider } from '@/providers/ToasterProvider';
+import QueryProvider from '@/providers/QueryProvider';
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -42,21 +43,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className='flex min-h-screen w-full flex-col'>
-            <Header />
-            <main className='flex-1'>{children}</main>
-            <Footer />
-            <SignInModal />
-            <SearchModal />
-            <ToasterProvider />
-          </div>
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className='flex min-h-screen w-full flex-col'>
+              <Header />
+              <main className='flex-1'>{children}</main>
+              <Footer />
+              <SignInModal />
+              <SearchModal />
+              <ToasterProvider />
+            </div>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
