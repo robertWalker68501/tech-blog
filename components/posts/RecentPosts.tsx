@@ -5,7 +5,12 @@ import { LuArrowRight } from 'react-icons/lu';
 import { Post } from '@/types/post';
 
 const RecentPosts = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/posts/recent`, {
+  const baseUrl = process.env.BASE_URL;
+  if (!baseUrl) {
+    throw new Error('BASE_URL environment variable is not configured');
+  }
+
+  const res = await fetch(`${baseUrl}/api/posts/recent`, {
     cache: 'no-store',
   });
 

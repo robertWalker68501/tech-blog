@@ -118,10 +118,15 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
 
     const DEFAULT_LIMIT = 3;
+    const MAX_LIMIT = 50;
 
     const cursor = searchParams.get('cursor');
 
-    const limit = Number(searchParams.get('limit')) || DEFAULT_LIMIT;
+    const rawLimit = Number(searchParams.get('limit'));
+    const limit =
+      Number.isNaN(rawLimit) || rawLimit <= 0
+        ? DEFAULT_LIMIT
+        : Math.min(rawLimit, MAX_LIMIT);
 
     const posts = await prisma.post.findMany({
       take: limit + 1,
@@ -135,6 +140,12 @@ export async function GET(req: Request) {
         slug: true,
         createdAt: true,
         coverImageURL: true,
+        author: {
+          select: {
+            name: true,
+            image: true,
+          },
+        },
       },
     });
 

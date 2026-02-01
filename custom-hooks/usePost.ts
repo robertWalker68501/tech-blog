@@ -5,7 +5,7 @@ import { FetchPostsResponse } from '@/types/post';
 
 export function useInfinitePosts({ limit }: { limit: number }) {
   return useInfiniteQuery<FetchPostsResponse>({
-    queryKey: ['posts'],
+    queryKey: ['posts', { limit }],
     queryFn: ({ pageParam }) =>
       fetchPosts({ pageParam: pageParam as string | null, limit }),
     initialPageParam: null,
