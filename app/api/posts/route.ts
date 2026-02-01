@@ -130,7 +130,7 @@ export async function GET(req: Request) {
 
     const posts = await prisma.post.findMany({
       take: limit + 1,
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
       cursor: cursor ? { id: cursor } : undefined,
       skip: cursor ? 1 : 0,
       select: {
